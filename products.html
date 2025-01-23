@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #444;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header {
+            padding: 20px;
+            background-color: rgba(0, 70, 140, 0.8);
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .product-item {
+            border: none;
+            background: linear-gradient(135deg, #ffffff 0%, #e1f5fe 100%);
+            padding: 20px;
+            margin: 15px;
+            width: 350px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .product-item h3 {
+            font-size: 1.6em;
+            color: #004c7f;
+            margin: 0 0 10px;
+        }
+
+        .product-item p {
+            font-size: 1em;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .price {
+            font-size: 1.3em;
+            color: #28a745;
+            margin: 10px 0;
+        }
+
+        .purchase-button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+        }
+
+        .purchase-button:hover {
+            background-color: #218838;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(0, 70, 140, 0.8);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Available Products</h1>
+            <p>Choose from our wide range of social media growth services.</p>
+        </div>
+
+        <div class="product-list" id="productList">
+            <!-- YouTube Products -->
+            <div class="product-item youtube">
+                <h3>YouTube Subscribers</h3>
+                <p>Get 1000 YouTube Subscribers 💯 Real and Non-Drop. Refill Guaranteed Within 30 Days</p>
+                <div class="price">$10.99</div>
+                <button class="purchase-button" onclick="addToCart('YouTube Subscribers', '$10.99')">Purchase</button>
+            </div>
+            <div class="product-item youtube">
+                <h3>YouTube Likes</h3>
+                <p>Boost your videos with real likes.</p>
+                <div class="price">$5.99</div>
+                <button class="purchase-button" onclick="addToCart('YouTube Likes', '$5.99')">Purchase</button>
+            </div>
+            <div class="product-item youtube">
+                <h3>YouTube Views</h3>
+                <p>Get more views on your videos for increased visibility.</p>
+                <div class="price">$7.99</div>
+                <button class="purchase<button class="purchase-button" onclick="addToCart('YouTube Views', '$7.99')">Purchase</button>
+            </div>
+            <div class="product-item youtube">
+                <h3>YouTube Watch Time</h3>
+                <p>Enhance your channel's credibility with increased watch time.</p>
+                <div class="price">$15.99</div>
+                <button class="purchase-button" onclick="addToCart('YouTube Watch Time', '$15.99')">Purchase</button>
+            </div>
+
+            <!-- Facebook Products -->
+            <div class="product-item facebook">
+                <h3>Facebook Followers</h3>
+                <p>Grow your audience with genuine Facebook followers.</p>
+                <div class="price">$9.99</div>
+                <button class="purchase-button" onclick="addToCart('Facebook Followers', '$9.99')">Purchase</button>
+            </div>
+            <div class="product-item facebook">
+                <h3>Facebook Likes</h3>
+                <p>Gain likes on your posts to increase engagement and reach.</p>
+                <div class="price">$4.99</div>
+                <button class="purchase-button" onclick="addToCart('Facebook Likes', '$4.99')">Purchase</button>
+            </div>
+
+            <!-- TikTok Products -->
+            <div class="product-item tiktok">
+                <h3>TikTok Followers</h3>
+                <p>Build a larger fan base on TikTok with real followers.</p>
+                <div class="price">$11.99</div>
+                <button class="purchase-button" onclick="addToCart('TikTok Followers', '$11.99')">Purchase</button>
+            </div>
+            <div class="product-item tiktok">
+                <h3>TikTok Likes</h3>
+                <p>Boost engagement on your TikTok videos with likes.</p>
+                <div class="price">$6.99</div>
+                <button class="purchase-button" onclick="addToCart('TikTok Likes', '$6.99')">Purchase</button>
+            </div>
+
+            <!-- Instagram Products -->
+            <div class="product-item instagram">
+                <h3>Instagram Followers</h3>
+                <p>Increase your Instagram followers with real, active profiles.</p>
+                <div class="price">$12.99</div>
+                <button class="purchase-button" onclick="addToCart('Instagram Followers', '$12.99')">Purchase</button>
+            </div>
+            <div class="product-item instagram">
+                <h3>Instagram Likes</h3>
+                <p>Gain more likes on your photos and posts for higher engagement.</p>
+                <div class="price">$5.99</div>
+                <button class="purchase-button" onclick="addToCart('Instagram Likes', '$5.99')">Purchase</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2024 Social Media Growth. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            alert(`${name} has been added to your cart.`);
+        }
+    </script>
+</body>
+</html>

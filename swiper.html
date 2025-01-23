@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<!-- Add this inside the <head> tag of your HTML -->
+<!-- Metadata loading script -->
+<script>
+  fetch('metadata.json')
+    .then(response => response.json())
+    .then(metadata => {
+      // Set the page title
+      document.title = metadata.title;
+
+      // Add meta description
+      const metaDescription = document.createElement('meta');
+      metaDescription.name = "description";
+      metaDescription.content = metadata.description;
+      document.head.appendChild(metaDescription);
+
+      // Add meta keywords
+      const metaKeywords = document.createElement('meta');
+      metaKeywords.name = "keywords";
+      metaKeywords.content = metadata.keywords;
+      document.head.appendChild(metaKeywords);
+
+      // Add Open Graph tags
+      const ogTitle = document.createElement('meta');
+      ogTitle.setAttribute('property', 'og:title');
+      ogTitle.content = metadata.og.title;
+      document.head.appendChild(ogTitle);
+
+      const ogDescription = document.createElement('meta');
+      ogDescription.setAttribute('property', 'og:description');
+      ogDescription.content = metadata.og.description;
+      document.head.appendChild(ogDescription);
+
+      const ogURL = document.createElement('meta');
+      ogURL.setAttribute('property', 'og:url');
+      ogURL.content = metadata.og.url;
+      document.head.appendChild(ogURL);
+
+      const ogImage = document.createElement('meta');
+      ogImage.setAttribute('property', 'og:image');
+      ogImage.content = metadata.og.image;
+      document.head.appendChild(ogImage);
+
+      // Add Twitter Card tags
+      const twitterCard = document.createElement('meta');
+      twitterCard.setAttribute('name', 'twitter:card');
+      twitterCard.content = metadata.twitter.card;
+      document.head.appendChild(twitterCard);
+
+      const twitterTitle = document.createElement('meta');
+      twitterTitle.setAttribute('name', 'twitter:title');
+      twitterTitle.content = metadata.twitter.title;
+      document.head.appendChild(twitterTitle);
+
+      const twitterDescription = document.createElement('meta');
+      twitterDescription.setAttribute('name', 'twitter:description');
+      twitterDescription.content = metadata.twitter.description;
+      document.head.appendChild(twitterDescription);
+
+      const twitterImage = document.createElement('meta');
+      twitterImage.setAttribute('name', 'twitter:image');
+      twitterImage.content = metadata.twitter.image;
+      document.head.appendChild(twitterImage);
+    })
+    .catch(error => console.error('Error loading metadata:', error));
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Products</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #444;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f9;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transition: transform 0.5s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+/* Hamburger Icon */
+.hamburger {
+    cursor: pointer;
+    font-size: 30px;
+    color: white;
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
+}
+
+.hamburger:hover {
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.hamburger.active {
+    transform: rotate(180deg); /* Rotate back when menu is open */
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0, 70, 140, 0.9);
+    position: absolute;
+    top: 10px;
+    left: 55px;
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transform: translateY(-100%);
+    z-index: 100;
+    opacity: 0;
+}
+
+.nav-menu.active {
+    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Slide down animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Slide up animation */
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+/* Navigation Links */
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    position: relative;
+    transition: transform 0.3s, color 0.3s, text-shadow 0.3s;
+}
+
+.nav-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+    color: #FFD700; /* Golden color on hover */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Decorative Underline */
+.nav-menu a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #FFD700; /* Golden underline */
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-menu a:hover::before {
+    width: 100%;
+}
+
+/* Fade-in effect for menu items */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Underline Decoration for Links */
+.nav-menu a {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.nav-menu a:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #FFD700;
+    animation: underlineEffect 0.3s forwards;
+}
+
+@keyframes underlineEffect {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+        .header {
+            padding: 20px;
+            background-color: rgba(0, 70, 140, 0.8);
+            color: white;
+            position: relative;
+            margin-top: 50px;
+            width: 90%;
+            border-radius: 10px;
+        }
+
+    
+        .header h1 {
+            font-size: 2.8em;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            margin: 10px 0;
+        }
+
+        .content {
+            width: auto%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .why-choose-us, .how-to-order {
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .why-choose-us h2, .how-to-order h2 {
+            font-size: 2.5em;
+            color: #004c7f;
+        }
+
+        .why-choose-us p, .how-to-order p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: auto;
+            color: #666;
+        }
+
+        .category-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 25px;
+        }
+
+        .category-buttons button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #004c7f;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .category-buttons button:hover {
+            background-color: #003b63;
+        }
+
+        .product-list {
+            display: none;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .product-list.active {
+            display: flex;
+        }
+
+        .product-item {
+            border: none;
+            background: linear-gradient(135deg, #ffffff 0%, #e1f5fe 100%);
+            padding: 20px;
+            margin: 15px;
+            width: 550px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-item h3 {
+            font-size: 1.6em;
+            color: #004c7f;
+            margin: 0 0 10px;
+            text-align: center;
+        }
+
+        .product-item p {
+            font-size: 1em;
+            text-align: center;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .product-item .price {
+            font-size: 1.3em;
+            color: #28a745;
+            margin: 10px 0;
+        }
+
+        .purchase-button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.2s;
+            border-radius: 5px;
+        }
+
+        .purchase-button:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(0, 70, 140, 0.8);
+            color: white;
+            font-size: 1.5em;
+            width: 90%;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .cart-icon {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            font-size: 2.5em;
+            color: white;
+            cursor: pointer;
+            background-color: #ff7f50;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .cart-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .cart-content h2 {
+            margin-top: 0;
+            color: #004c7f;
+        }
+
+        .cart-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .remove-button {
+            background: #ff4757;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-button:hover {
+            background: #ff3d3d;
+        }
+
+        .cart-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .close-cart {
+            cursor: pointer;
+            background: #ff4757;
+            border: none;
+            font-size: 1.2em;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .close-cart:hover {
+            background: #ff3d3d;
+        }
+
+        .checkout-button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition:background-color 0.3s;
+        }
+
+        .checkout-button:hover {
+            background-color: #218838;
+        }
+        /* Existing CSS styles... */
+        /* Additional styling for currency selector */
+        .currency-selector {
+            margin: 20px 0;
+        }
+
+ .currency-selector select {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    border: 2px solid #007bff;
+    background-color: #ffffff;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    appearance: none; /* Remove default dropdown arrow */
+    cursor: pointer;
+}
+
+.currency-selector select:focus {
+    border-color: #0056b3;
+    background-color: #f0f8ff;
+    outline: none;
+    box-shadow: 0 0 15px rgba(0, 86, 179, 0.3);
+}
+
+.currency-selector select:hover {
+    border-color: #0056b3;
+    background-color: #e6f0ff;
+}
+
+.currency-selector select::after {
+    content: '\25BC'; /* Custom arrow */
+    font-size: 1.2em;
+    color: #007bff;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.currency-selector {
+    position: relative;
+    display: inline-block;
+}
+
+.currency-selector select option {
+    padding: 12px;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.currency-selector select option:hover {
+    background-color: #f0f8ff;
+}
+      /* WhatsApp Icon styling */
+        .whatsapp-icon {
+            position: fixed;
+            bottom: 20px; /* Default position */
+            left: 20px; /* Default position */
+            z-index: 1000;
+            cursor: grab;
+            width: 200px;
+            height: 200px;
+        }
+        .whatsapp-icon img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        .whatsapp-icon img:hover {
+            transform: scale(1.1);
+        }
+     {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#contact-info {
+    margin-top: 20px;
+    font-size: 18px;
+    color: white;
+}
+        /* Add your existing styles here */
+
+        /* Swiper Container Styling */
+        .swiper {
+            width: 100%;
+            max-width: 640px;
+            margin: 20px auto;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: #000; /* Adjust navigation button colors */
+        }
+        .swiper-pagination-bullet {
+            background-color: #000; /* Adjust pagination dot colors */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- WhatsApp Icon Link -->
+    <a href="https://wa.me/+923346002440?text=AOA%20AnyOne There" target="_blank" class="whatsapp-icon" id="whatsappIcon">
+        <img src="whatsappicon.png" alt="WhatsApp">
+    </a>
+   
+  <span class="cart-icon" onclick="toggleCart()">🛒</span>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <h2>Your Cart</h2>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-footer">
+                <button class="checkout-button" onclick="checkout()">Checkout via WhatsApp</button>
+                <button class="close-cart" onclick="toggleCart()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <span class="hamburger" onclick="toggleMenu()">☰</span>
+    <div class="nav-menu" id="navMenu">
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#about">About Us</a>
+        <a href="#contact" id="contact-link">Contact</a>
+    <p id="contact-info"></p>
+    </div>
+    <div class="background"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to The Social Provider Hub</h1>
+            <p>Your go-to destination for growing your online presence on YouTube, Facebook, TikTok, and Instagram.</p>
+        </div>
+ <!-- Currency Selector -->
+    <div class="currency-selector">
+        <label for="currency"><h1>Select your Currency :</h1></label>
+        <select id="currency" onchange="updatePrices()">
+            <option value="USD">USD ($)</option>
+            <option value="PKR">PKR (₨)</option>
+            <option value="INR">INR (₹)</option>
+        </select>
+    </div>
+        <div class="content">
+            <div class="why-choose-us" id="about">
+                <h2>Why Choose Us?</h2>
+                <p>
+                    We provide top-notch services to help you grow your YouTube channel, including:
+                    gaining subscribers, increasing watch time, getting likes and comments, and full channel SEO.
+                    Our expert team ensures your channel complies with all guidelines for long-lasting, non-drop results.
+                    Elevate your brand with our affordable and effective solutions tailored for content creators!
+                </p>
+            </div>
+<video width="640" height="360" controls>
+  <source src="proof-video.mp4" type="video/mp4">
+  <source src="path/to/your-video.ogg" type="video/ogg">
+
+  Your browser does not support the video tag.
+</video>
+            <div class="how-to-order" id="products">
+                <h2>How to Order?</h2>
+                <p>
+                    Ordering is simple! Follow these steps:
+                    <ol>
+                        <li>Call us or WhatsApp at <strong>+923346002440</strong></li>
+                        <li>Choose your desired service from our product list below.</li>
+                        <li>Click the "Purchase" button next to your chosen service.</li>
+                        <li>Complete the checkout process and provide the necessary details.</li>
+                        <li>Receive confirmation and start enjoying the benefits of our services!</li>
+                    </ol>
+                </p>
+            </div>
+   <!-- Add Swiper Carousel -->
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="1.jpg" alt="Image 1"></div>
+            <div class="swiper-slide"><img src="2.jpg" alt="Image 2"></div>
+            <div class="swiper-slide"><img src="3.jpg" alt="Image 3"></div>
+            <div class="swiper-slide"><img src="2.jpg" alt="Image 4"></div>
+            <!-- Add more slides as needed -->
+        </div>
+        <!-- Add Swiper Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <!-- Add Swiper Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+            <div class="category-buttons">
+                <button onclick="showProducts('youtube')" style="background:none; border:none; padding:0; cursor:pointer;">
+  <img src="youtube-icon.png" alt="YouTube" style="width:170px; height:170px;">
+</button>
+                <!-- Facebook Button -->
+<button onclick="showProducts('facebook')" style="background:none; border:none; padding:0; cursor:pointer;">
+  <img src="facebook-icon.png" alt="Facebook" style="width:100px; height:100px;">
+</button>
+
+<!-- Instagram Button -->
+<button onclick="showProducts('instagram')" style="background:none; border:none; padding:0; cursor:pointer;">
+  <img src="Instagram-icon.png" alt="Instagram" style="width:120px; height:120px;">
+</button>
+
+<!-- TikTok Button -->
+<button onclick="showProducts('tiktok')" style="background:none; border:none; padding:0; cursor:pointer;">
+  <img src="tiktok-icon.png" alt="TikTok" style="width:150px; height:150px;">
+</button>
+            </div>
+
+            <div class="product-list" id="productList">
+                <!-- YouTube Products -->
+                <div class="product-item youtube">
+                    <h3>YouTube Subscribers</h3>
+                    <p>Get 1000 YouTube Subscribers 💯 Real and Non-Drop. Refill Guaranteed Within 30 Days</p>
+                    <div class="price">$10.99</div>
+                    <button class="purchase-button">Purchase</button>
+                </div>
+                <div class="product-item youtube">
+                    <h3>YouTube Likes</h3>
+                    <p>Boost your videos with real likes.</p>
+                    <div class="price">$5.99</div>
+                    <button class="purchase-button">Purchase</button>
+                </div>
+                <div class="product-item youtube">
+                    <h3>YouTube Views</h3>
+                    <p>Get more views on your videos for increased visibility.</p>
+                    <div class="price">$7.99</div>
+                    <button class="purchase-button">Purchase</button>
+                </div>
+                <div class="product-item youtube">
+                    <h3>YouTube Watch Time</h3>
+                    <p>Enhance your channel's credibility with increased watch time.</p>
+                    <div class="price">$15.99</div>
+                    <button class="purchase-button">Purchase</button>
+                </div>
+
+                <!-- Facebook Products -->
+                <div class="product-item facebook">
+                    <h3>Facebook Followers</h3>
+                    <p>Grow your audience with genuine Facebook followers.</p>
+                    <div class="price">$9.99</div>
+                    <button class="purchase-button">Purchase</button>
+                </div>
+                <div class="product-item facebook">
+                    <h3>Facebook Likes</h3>
+                    <p>Gain likes on your posts to increase engagement and reach.</p>
+                    <div class="price">$4.99</div>
+                    <button class="purchase-button">Purchase</button>
+                </div>
+
+                <!-- TikTok Products -->
+                <div class="product-item tiktok">
+                    <h3>TikTok Followers</h3>
+                    <p>Build a larger fan base on TikTok with real followers.</p>
+                    <div class="price">$11.99</div>
+                    <button class="purchase-button">Purchase</button>
+                </div>
+                <div class="product-item tiktok">
+                    <h3>TikTok Likes</h3>
+                    <p>Boost engagement on your TikTok videos with likes.</p>
+                    <div class="price">$6.99</div>
+                    <button class="purchase-button">Purchase</button>
+                </div>
+
+                <!-- Instagram Products -->
+                <div class="product-item instagram">
+                    <h3>Instagram Followers</h3>
+                    <p>Increase your Instagram followers with real, active profiles.</p>
+                    <div class="price">$12.99</div>
+                    <button class="purchase-button">Purchase</button>
+                </div>
+                <div class="product-item instagram">
+                    <h3>Instagram Likes</h3>
+                    <p>Gain more likes on your photos and posts for higher engagement.</p>
+                    <div class="price">$5.99</div>
+                    <button class="purchase-button">Purchase</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2024 The Social Provider. All Rights Reserved.
+        </div>
+    </div>
+
+
+    <!-- Include Swiper.js -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // Swiper Initialization
+        const swiper = new Swiper('.swiper', {
+            loop: true, // Enable infinite loop
+            autoplay: {
+                delay: 5000, // Change slides every 5 seconds
+                disableOnInteraction: false, // Keep autoplay after manual interaction
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+const whatsappIcon = document.getElementById('whatsappIcon');
+    let isDragging = false;
+    let startX, startY, offsetX, offsetY;
+
+    // Desktop events
+    whatsappIcon.addEventListener('mousedown', function(e) {
+        startDrag(e.clientX, e.clientY);
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+        if (isDragging) {
+            dragIcon(e.clientX, e.clientY);
+        }
+    });
+
+    document.addEventListener('mouseup', function(e) {
+        endDrag(e.clientX, e.clientY);
+    });
+
+    // Mobile events
+    whatsappIcon.addEventListener('touchstart', function(e) {
+        const touch = e.touches[0];
+        startDrag(touch.clientX, touch.clientY);
+        e.preventDefault();
+    });
+
+    document.addEventListener('touchmove', function(e) {
+        if (isDragging) {
+            const touch = e.touches[0];
+            dragIcon(touch.clientX, touch.clientY);
+        }
+    });
+
+    document.addEventListener('touchend', function(e) {
+        const touch = e.changedTouches[0];
+        endDrag(touch.clientX, touch.clientY);
+    });
+
+    function startDrag(x, y) {
+        isDragging = true;
+        startX = x;
+        startY = y;
+        const rect = whatsappIcon.getBoundingClientRect();
+        offsetX = x - rect.left;
+        offsetY = y - rect.top;
+        whatsappIcon.style.cursor = 'grabbing';
+    }
+
+    function dragIcon(x, y) {
+        whatsappIcon.style.left = `${x - offsetX}px`;
+        whatsappIcon.style.top = `${y - offsetY}px`;
+        whatsappIcon.style.right = 'auto';
+        whatsappIcon.style.bottom = 'auto';
+    }
+
+    function endDrag(x, y) {
+        if (isDragging) {
+            isDragging = false;
+            whatsappIcon.style.cursor = 'grab';
+
+            // Check if the drag distance is small (treat as a click)
+            const distance = Math.sqrt(Math.pow(x - startX, 2) + Math.pow(y - startY, 2));
+            if (distance < 5) {
+                // Simulate a click on the icon link
+                whatsappIcon.click();
+            }
+        }
+    }
+        // Initialize empty cart from localStorage or default to empty array
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let currency = 'USD'; // Default currency
+        let currencyRates = { PKR: 280, INR: 83 }; // Conversion rates for PKR and INR to USD
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger');
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function showProducts(category) {
+            const allProducts = document.querySelectorAll('.product-item');
+            allProducts.forEach(product => {
+                product.style.display = product.classList.contains(category) ? 'flex' : 'none';
+            });
+            document.getElementById('productList').classList.add('active');
+        }
+
+        function toggleCart() {
+            const cartModal = document.getElementById('cartModal');
+            cartModal.style.display = cartModal.style.display === 'flex' ? 'none' : 'flex';
+            displayCartItems();
+        }
+
+        function addToCart(productName, price) {
+            const existingProduct = cart.find(item => item.name === productName);
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({ name: productName, price, quantity: 1 });
+            }
+            updateCart();
+            alert(`${productName} added to cart!`);
+        }
+
+        function removeFromCart(productName) {
+            cart = cart.filter(item => item.name !== productName);
+            updateCart();
+            displayCartItems();
+        }
+
+        function updateCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function displayCartItems() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name} (x${item.quantity})</span>
+                        <span>${formatPrice(itemTotal)}</span>
+                        <button class="remove-button" onclick="removeFromCart('${item.name}')">Remove</button>
+                    </div>
+                `;
+            });
+
+            cartItemsContainer.innerHTML += `
+                <div class="cart-item">
+                    <strong>Total</strong>
+                    <strong>${formatPrice(total)}</strong>
+                </div>
+            `;
+        }
+
+        function checkout() {
+            let message = "Hello! I would like to order the following:\n";
+            cart.forEach(item => {
+                message += `${item.name} (x${item.quantity}) - ${formatPrice(item.price)}\n`;
+            });
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            message += `Total: ${formatPrice(total)}`;
+
+            // WhatsApp API URL with pre-filled message
+            window.open(`https://wa.me/923346002440?text=${encodeURIComponent(message)}`);
+
+            // Clear the cart after checkout
+            cart = [];
+            updateCart();
+            toggleCart(); // Close the cart modal
+        }
+
+        function formatPrice(amount) {
+            // Format the price based on selected currency
+            if (currency === 'USD') return `$${amount.toFixed(2)}`;
+            if (currency === 'PKR') return `₨${(amount * currencyRates.PKR).toFixed(0)}`;
+            if (currency === 'INR') return `₹${(amount * currencyRates.INR).toFixed(0)}`;
+            return amount;
+        }
+
+        function updatePrices() {
+            currency = document.getElementById('currency').value;
+            // Update all displayed prices
+            document.querySelectorAll('.product-item').forEach(item => {
+                const basePrice = parseFloat(item.querySelector('.price').getAttribute('data-price'));
+                item.querySelector('.price').innerText = formatPrice(basePrice);
+            });
+            displayCartItems();
+        }
+
+        // Attach event listeners to purchase buttons
+        document.querySelectorAll('.purchase-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const productItem = button.parentElement;
+                const productName = productItem.querySelector('h3').innerText;
+                const price = parseFloat(productItem.querySelector('.price').getAttribute('data-price'));
+                addToCart(productName, price);
+            });
+        });
+
+        // Update prices and display cart items on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll('.product-item .price').forEach(priceElement => {
+                // Store base price in a data attribute for later conversions
+                const price = parseFloat(priceElement.innerText.replace('$', ''));
+                priceElement.setAttribute('data-price', price);
+                priceElement.innerText = formatPrice(price);
+            });
+            displayCartItems();
+        });
+document.getElementById('contact-link').addEventListener('click', function () {
+    document.getElementById('contact-info').innerText = "Call or WhatsApp 03346002440";
+});
+function toggleMenu() {
+    const menu = document.querySelector('.nav-menu');
+    const hamburger = document.querySelector('.hamburger');
+    
+    menu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+}
+        // Existing JavaScript code for other functionality...
+    </script>
+</body>
+</html>

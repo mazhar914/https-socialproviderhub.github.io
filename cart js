@@ -1,0 +1,46 @@
+// cart.js
+
+const cart = [];
+
+function addToCart(productName, price) {
+    const product = { name: productName, price: price };
+    cart.push(product);
+    updateCart();
+}
+
+function updateCart() {
+    displayCartItems();
+    document.getElementById('cart-count').textContent = cart.length;
+}
+
+function displayCartItems() {
+    const cartItems = document.getElementById('cartItems');
+    cartItems.innerHTML = '';
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+        cartItems.appendChild(itemDiv);
+        totalPrice += item.price;
+    });
+
+    const totalDiv = document.getElementById('cart-total');
+    totalDiv.textContent = `Total: $${totalPrice.toFixed(2)}`;
+    document.getElementById('cartDetails').style.display = cart.length > 0 ? 'block' : 'none';
+}
+
+function toggleCartDetails() {
+    const cartDetails = document.getElementById('cartDetails');
+    cartDetails.style.display = cartDetails.style.display === 'block' ? 'none' : 'block';
+}
+
+function purchaseViaWhatsApp() {
+    const message = cart.map(item => `${item.name} - $${item.price.toFixed(2)}`).join('%0A');
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    const totalMessage = `Total: $${total.toFixed(2)}`;
+    const whatsappNumber = '923346002440';
+    const whatsappMessage = `I want to purchase the following items:%0A${message}%0A${totalMessage}`;
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappURL, '_blank');
+}
